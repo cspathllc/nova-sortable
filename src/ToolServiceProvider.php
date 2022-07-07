@@ -6,12 +6,8 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Outl1ne\NovaTranslationsLoader\LoadsNovaTranslations;
-
 class ToolServiceProvider extends ServiceProvider
 {
-    use LoadsNovaTranslations;
-
     public function boot()
     {
         $this->app->booted(function () {
@@ -21,8 +17,6 @@ class ToolServiceProvider extends ServiceProvider
         Nova::serving(function (ServingNova $event) {
             Nova::script('nova-sortable', __DIR__ . '/../dist/js/entry.js');
         });
-
-        $this->loadTranslations(__DIR__ . '/../resources/lang', 'nova-sortable', true);
     }
 
     /**
